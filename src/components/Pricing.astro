@@ -94,8 +94,9 @@ const features = [
 
 <script is:inline>
 (function () {
-  // In production, set this to your deployed API URL (e.g. https://api.cdr2svg.com)
-  const API_BASE = window.location.hostname === 'localhost' ? 'http://localhost:3000' : '';
+  const API_BASE = window.location.hostname === 'localhost'
+    ? 'http://localhost:3000'
+    : 'https://license-api.cdr2svg.com';
 
   const emailInput = document.getElementById('buyer-email');
   const continueBtn = document.getElementById('continue-to-pay');
