@@ -1,24 +1,17 @@
 ---
-const steps = [
-  {
-    number: '01',
-    title: 'Drop your .cdr file',
-    description: 'Drag any CorelDRAW file into CDR2SVG. The vector preview loads instantly — no waiting, no progress bars.',
-    visual: `<svg viewBox="0 0 120 80" fill="none" class="w-full h-full text-accent/40"><rect x="10" y="10" width="100" height="60" rx="8" stroke="currentColor" stroke-width="1" stroke-dasharray="6 3"/><path d="M60 25V55M60 55L48 43M60 55L72 43" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><text x="60" y="72" text-anchor="middle" fill="currentColor" font-size="8" font-family="monospace" opacity="0.6">.cdr</text></svg>`,
-  },
-  {
-    number: '02',
-    title: 'Check the preview',
-    description: 'See the artwork before you commit to exporting. Switch to the SVG code view if you need the markup directly.',
-    visual: `<svg viewBox="0 0 120 80" fill="none" class="w-full h-full text-accent/40"><rect x="10" y="10" width="100" height="60" rx="8" stroke="currentColor" stroke-width="1"/><circle cx="45" cy="40" r="12" stroke="currentColor" stroke-width="1" fill="currentColor" fill-opacity="0.1"/><polygon points="75,30 90,50 60,50" stroke="currentColor" stroke-width="1" fill="currentColor" fill-opacity="0.1"/><rect x="32" y="48" width="26" height="14" rx="2" stroke="currentColor" stroke-width="0.75" opacity="0.5"/></svg>`,
-  },
-  {
-    number: '03',
-    title: 'Export or copy',
-    description: 'Save as SVG, EPS, PDF or AI — or just copy the SVG code and paste it wherever you need it. Done.',
-    visual: `<svg viewBox="0 0 120 80" fill="none" class="w-full h-full text-accent/40"><rect x="20" y="15" width="32" height="20" rx="4" stroke="currentColor" stroke-width="1"/><text x="36" y="28" text-anchor="middle" fill="currentColor" font-size="7" font-family="monospace">SVG</text><rect x="60" y="15" width="32" height="20" rx="4" stroke="currentColor" stroke-width="1"/><text x="76" y="28" text-anchor="middle" fill="currentColor" font-size="7" font-family="monospace">EPS</text><rect x="20" y="45" width="32" height="20" rx="4" stroke="currentColor" stroke-width="1"/><text x="36" y="58" text-anchor="middle" fill="currentColor" font-size="7" font-family="monospace">PDF</text><rect x="60" y="45" width="32" height="20" rx="4" stroke="currentColor" stroke-width="1"/><text x="76" y="58" text-anchor="middle" fill="currentColor" font-size="7" font-family="monospace">AI</text><path d="M50 40L56 40" stroke="currentColor" stroke-width="1" opacity="0.3"/></svg>`,
-  },
+import { type Lang, defaultLang } from '../i18n/index';
+import { t } from '../i18n/index';
+
+interface Props { lang?: Lang; }
+const lang: Lang = Astro.props.lang || defaultLang;
+const i = t(lang);
+
+const visuals = [
+  `<svg viewBox="0 0 120 80" fill="none" class="w-full h-full text-accent/40"><rect x="10" y="10" width="100" height="60" rx="8" stroke="currentColor" stroke-width="1" stroke-dasharray="6 3"/><path d="M60 25V55M60 55L48 43M60 55L72 43" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><text x="60" y="72" text-anchor="middle" fill="currentColor" font-size="8" font-family="monospace" opacity="0.6">.cdr</text></svg>`,
+  `<svg viewBox="0 0 120 80" fill="none" class="w-full h-full text-accent/40"><rect x="10" y="10" width="100" height="60" rx="8" stroke="currentColor" stroke-width="1"/><circle cx="45" cy="40" r="12" stroke="currentColor" stroke-width="1" fill="currentColor" fill-opacity="0.1"/><polygon points="75,30 90,50 60,50" stroke="currentColor" stroke-width="1" fill="currentColor" fill-opacity="0.1"/><rect x="32" y="48" width="26" height="14" rx="2" stroke="currentColor" stroke-width="0.75" opacity="0.5"/></svg>`,
+  `<svg viewBox="0 0 120 80" fill="none" class="w-full h-full text-accent/40"><rect x="20" y="15" width="32" height="20" rx="4" stroke="currentColor" stroke-width="1"/><text x="36" y="28" text-anchor="middle" fill="currentColor" font-size="7" font-family="monospace">SVG</text><rect x="60" y="15" width="32" height="20" rx="4" stroke="currentColor" stroke-width="1"/><text x="76" y="28" text-anchor="middle" fill="currentColor" font-size="7" font-family="monospace">EPS</text><rect x="20" y="45" width="32" height="20" rx="4" stroke="currentColor" stroke-width="1"/><text x="36" y="58" text-anchor="middle" fill="currentColor" font-size="7" font-family="monospace">PDF</text><rect x="60" y="45" width="32" height="20" rx="4" stroke="currentColor" stroke-width="1"/><text x="76" y="58" text-anchor="middle" fill="currentColor" font-size="7" font-family="monospace">AI</text><path d="M50 40L56 40" stroke="currentColor" stroke-width="1" opacity="0.3"/></svg>`,
 ];
+const numbers = ['01', '02', '03'];
 ---
 
 <section id="how-it-works" class="relative py-32 px-6">
@@ -28,20 +21,20 @@ const steps = [
     <!-- Section header -->
     <div class="text-center mb-20">
       <h2 class="reveal font-display text-4xl sm:text-5xl font-bold tracking-tight mb-4">
-        Three steps. <span class="text-white/40">Seriously.</span>
+        {i.howItWorks.title} <span class="text-white/40">{i.howItWorks.titleFaded}</span>
       </h2>
     </div>
 
     <!-- Steps -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-      {steps.map((step, i) => (
-        <div class={`reveal reveal-delay-${i + 1} relative group`}>
+      {i.howItWorks.steps.map((step, idx) => (
+        <div class={`reveal reveal-delay-${idx + 1} relative group`}>
           <div class="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-7 h-full hover:border-white/[0.1] transition-all duration-300">
             <!-- Step number -->
-            <div class="font-mono text-xs text-accent/50 mb-6 tracking-widest">{step.number}</div>
+            <div class="font-mono text-xs text-accent/50 mb-6 tracking-widest">{numbers[idx]}</div>
 
             <!-- Visual -->
-            <div class="w-full h-24 mb-6 opacity-60 group-hover:opacity-100 transition-opacity duration-300" set:html={step.visual} />
+            <div class="w-full h-24 mb-6 opacity-60 group-hover:opacity-100 transition-opacity duration-300" set:html={visuals[idx]} />
 
             <!-- Title -->
             <h3 class="font-display font-semibold text-lg text-white mb-2">{step.title}</h3>
@@ -50,7 +43,7 @@ const steps = [
           </div>
 
           {/* Connector arrow (between cards on desktop) */}
-          {i < 2 && (
+          {idx < 2 && (
             <div class="hidden md:block absolute top-1/2 -right-3 z-10 text-white/10">
               <svg width="6" height="10" viewBox="0 0 6 10" fill="none">
                 <path d="M1 1L5 5L1 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -66,13 +59,10 @@ const steps = [
       <div class="absolute top-6 left-8 text-accent/20 text-4xl font-display leading-none">&ldquo;</div>
       <blockquote class="text-white/50 text-base sm:text-lg leading-relaxed max-w-3xl mx-auto pl-6">
         <p class="mb-4 italic text-white/60">
-          Downloaded a client's brand guidelines from Brands of the World.
-          Six .cdr files. Zero way to open them.
+          {i.howItWorks.quote}
         </p>
         <p class="text-sm text-white/35 not-italic">
-          That's why CDR2SVG exists. Drop the file, get clean vectors, move on
-          with your day. No CorelDRAW license. No subscription to some online
-          converter. No file upload to a server you don't control.
+          {i.howItWorks.quoteFollow}
         </p>
       </blockquote>
     </div>

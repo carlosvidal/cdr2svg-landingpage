@@ -1,4 +1,11 @@
 ---
+import { type Lang, defaultLang } from '../i18n/index';
+import { t } from '../i18n/index';
+
+interface Props { lang?: Lang; }
+const lang: Lang = Astro.props.lang || defaultLang;
+const i = t(lang);
+const prefix = lang === defaultLang ? '' : `/${lang}`;
 ---
 
 <footer class="relative border-t border-white/[0.06] py-16 px-6">
@@ -11,9 +18,9 @@
 
       <!-- Links -->
       <div class="flex items-center gap-6 text-sm text-white/30">
-        <a href="/privacy" class="hover:text-white/60 transition-colors">Privacy</a>
-        <a href="/terms" class="hover:text-white/60 transition-colors">Terms</a>
-        <a href="mailto:support@cdr2svg.com" class="hover:text-white/60 transition-colors">Support</a>
+        <a href={`${prefix}/privacy`} class="hover:text-white/60 transition-colors">{i.footer.privacy}</a>
+        <a href={`${prefix}/terms`} class="hover:text-white/60 transition-colors">{i.footer.terms}</a>
+        <a href="mailto:support@cdr2svg.com" class="hover:text-white/60 transition-colors">{i.footer.support}</a>
       </div>
 
       <!-- Copyright -->

@@ -1,17 +1,33 @@
 ---
+import { type Lang, defaultLang, languages } from '../i18n/index';
+import { t } from '../i18n/index';
+
 interface Props {
   title?: string;
   description?: string;
+  keywords?: string;
+  ogTitle?: string;
+  ogDescription?: string;
+  lang?: Lang;
 }
 
+const lang: Lang = Astro.props.lang || defaultLang;
+const i = t(lang);
+
 const {
-  title = 'CDR2SVG — Open CorelDRAW files on Mac',
-  description = 'Convert CorelDRAW .cdr files to SVG, EPS, PDF and AI on your Mac — no CorelDRAW needed. Preview, export and copy SVG code. Native Apple Silicon.',
+  title = i.meta.title,
+  description = i.meta.description,
+  keywords = i.meta.keywords,
+  ogTitle = i.meta.ogTitle,
+  ogDescription = i.meta.ogDescription,
 } = Astro.props;
+
+const canonicalBase = 'https://cdr2svg.com';
+const currentPath = Astro.url.pathname.replace(/\/(en|es|fr|de|it|pt|ru)/, '').replace(/^\/$/, '') || '/';
 ---
 
 <!doctype html>
-<html lang="en" class="scroll-smooth overflow-x-hidden">
+<html lang={lang} class="scroll-smooth overflow-x-hidden">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -20,18 +36,30 @@ const {
     <!-- SEO -->
     <title>{title}</title>
     <meta name="description" content={description} />
-    <meta name="keywords" content="open cdr file mac, cdr to svg mac, coreldraw without coreldraw, cdr file converter mac, cdr to illustrator mac, convert cdr to ai mac" />
+    <meta name="keywords" content={keywords} />
+
+    <!-- Canonical & hreflang -->
+    <link rel="canonical" href={`${canonicalBase}${Astro.url.pathname}`} />
+    {Object.keys(languages).map((l) => (
+      <link
+        rel="alternate"
+        hreflang={l}
+        href={`${canonicalBase}${l === defaultLang ? '' : `/${l}`}${currentPath === '/' ? '' : currentPath}`}
+      />
+    ))}
+    <link rel="alternate" hreflang="x-default" href={`${canonicalBase}${currentPath === '/' ? '' : currentPath}`} />
 
     <!-- OG -->
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="CorelDRAW files. No CorelDRAW required." />
-    <meta property="og:description" content="Convert .cdr to SVG, EPS, PDF and AI — natively on Apple Silicon." />
+    <meta property="og:title" content={ogTitle} />
+    <meta property="og:description" content={ogDescription} />
     <meta property="og:image" content="/og-image.png" />
+    <meta property="og:locale" content={lang} />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="CorelDRAW files. No CorelDRAW required." />
-    <meta name="twitter:description" content="Convert .cdr to SVG, EPS, PDF and AI — natively on Apple Silicon." />
+    <meta name="twitter:title" content={ogTitle} />
+    <meta name="twitter:description" content={ogDescription} />
     <meta name="twitter:image" content="/og-image.png" />
 
     <!-- Fonts -->

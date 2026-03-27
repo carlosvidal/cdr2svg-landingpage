@@ -1,4 +1,10 @@
 ---
+import { type Lang, defaultLang } from '../i18n/index';
+import { t } from '../i18n/index';
+
+interface Props { lang?: Lang; }
+const lang: Lang = Astro.props.lang || defaultLang;
+const i = t(lang);
 ---
 
 <section class="relative min-h-screen flex items-center justify-center pt-16 overflow-hidden">
@@ -15,26 +21,20 @@
     <!-- Version badge -->
     <div class="reveal inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/[0.08] bg-white/[0.03] text-xs text-white/40 font-mono mb-10">
       <span class="w-1.5 h-1.5 rounded-full bg-accent animate-pulse"></span>
-      macOS 13+ &middot; Apple Silicon native &middot; One-time purchase
+      {i.hero.badge}
     </div>
 
     <!-- Headline -->
     <h1 class="reveal reveal-delay-1 font-display text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight leading-[1.05] mb-6">
-      CorelDRAW files.<br />
-      <span class="bg-gradient-to-r from-accent via-accent-glow to-accent bg-clip-text text-transparent">No CorelDRAW required.</span>
+      {i.hero.headline}<br />
+      <span class="bg-gradient-to-r from-accent via-accent-glow to-accent bg-clip-text text-transparent">{i.hero.headlineAccent}</span>
     </h1>
 
     <!-- Subheadline -->
-    <p class="reveal reveal-delay-2 text-lg sm:text-xl text-white/50 max-w-2xl mx-auto leading-relaxed mb-8">
-      Convert <code class="text-white/70 bg-white/[0.06] px-1.5 py-0.5 rounded text-[0.9em] font-mono">.cdr</code> logos to SVG, EPS, PDF and AI — and open them in Illustrator, Affinity&nbsp;Designer or Inkscape.
-    </p>
+    <p class="reveal reveal-delay-2 text-lg sm:text-xl text-white/50 max-w-2xl mx-auto leading-relaxed mb-8" set:html={i.hero.subheadline.replace(/<code>/g, '<code class="text-white/70 bg-white/[0.06] px-1.5 py-0.5 rounded text-[0.9em] font-mono">')} />
 
     <!-- Expanded description -->
-    <p class="reveal reveal-delay-3 text-sm text-white/30 max-w-xl mx-auto leading-relaxed mb-12">
-      You downloaded a logo from Brands of the World. It's a <code class="font-mono text-white/40">.cdr</code> file.
-      Illustrator won't open it. Affinity can't touch it. Inkscape just gives up.
-      CDR2SVG converts it in seconds.
-    </p>
+    <p class="reveal reveal-delay-3 text-sm text-white/30 max-w-xl mx-auto leading-relaxed mb-12" set:html={i.hero.description.replace(/<code>/g, '<code class="font-mono text-white/40">')} />
 
     <!-- CTAs -->
     <div class="reveal reveal-delay-4 flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
@@ -44,16 +44,16 @@
           <path d="M9 2V12M9 12L4.5 7.5M9 12L13.5 7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           <path d="M3 16H15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
         </svg>
-        Download CDR2SVG
+        {i.hero.cta}
       </a>
       <!-- Secondary -->
       <a href="#pricing" class="inline-flex items-center gap-2 px-8 py-4 rounded-xl border border-white/[0.1] text-white/70 font-display font-medium text-base hover:border-white/20 hover:text-white transition-all duration-300">
-        Buy a license — $9
+        {i.hero.ctaBuy}
       </a>
     </div>
 
     <p class="reveal reveal-delay-5 text-xs text-white/25 font-mono">
-      Free to try &middot; $9 to unlock
+      {i.hero.footnote}
     </p>
 
     <!-- App preview mockup -->
@@ -61,7 +61,7 @@
       <div class="relative rounded-2xl border border-white/[0.08] overflow-hidden shadow-2xl shadow-black/50">
         <img
           src="/cdr2svg-screenshot.webp"
-          alt="CDR2SVG — Convert CorelDRAW files to SVG on Mac"
+          alt={i.hero.imgAlt}
           class="w-full h-auto"
           loading="eager"
         />

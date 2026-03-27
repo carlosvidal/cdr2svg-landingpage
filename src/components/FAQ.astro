@@ -1,22 +1,10 @@
 ---
-const faqs = [
-  {
-    question: 'Can I try it before buying?',
-    answer: 'Yes. Download CDR2SVG for free and get 10 full conversions — no strings attached. Preview your files, export to any format, copy SVG code. If it works for you (it will), a license unlocks unlimited conversions.',
-  },
-  {
-    question: 'Does it work with all versions of CorelDRAW files?',
-    answer: 'CDR2SVG uses libcdr to parse files, which supports CDR versions 7 through X8 and most files from newer versions. If you have a file that doesn\'t convert, get in touch.',
-  },
-  {
-    question: 'Does my file get uploaded anywhere?',
-    answer: 'Never. Everything runs locally on your Mac. Your files stay on your machine.',
-  },
-  {
-    question: 'Why is it Apple Silicon only?',
-    answer: 'CDR2SVG is built and tested on M-series Macs. Intel support may come later — sign up to be notified.',
-  },
-];
+import { type Lang, defaultLang } from '../i18n/index';
+import { t } from '../i18n/index';
+
+interface Props { lang?: Lang; }
+const lang: Lang = Astro.props.lang || defaultLang;
+const i = t(lang);
 ---
 
 <section id="faq" class="relative py-32 px-6">
@@ -25,13 +13,13 @@ const faqs = [
   <div class="max-w-2xl mx-auto">
     <!-- Section header -->
     <h2 class="reveal font-display text-4xl sm:text-5xl font-bold tracking-tight text-center mb-16">
-      Questions<span class="text-white/40">.</span>
+      {i.faq.title}<span class="text-white/40">.</span>
     </h2>
 
     <!-- FAQ items -->
     <div class="space-y-4">
-      {faqs.map((faq, i) => (
-        <details class={`reveal reveal-delay-${Math.min(i + 1, 5)} group rounded-xl border border-white/[0.06] bg-white/[0.02] transition-all duration-300 hover:border-white/[0.1]`}>
+      {i.faq.items.map((faq, idx) => (
+        <details class={`reveal reveal-delay-${Math.min(idx + 1, 5)} group rounded-xl border border-white/[0.06] bg-white/[0.02] transition-all duration-300 hover:border-white/[0.1]`}>
           <summary class="flex items-center justify-between gap-4 px-7 py-5 cursor-pointer list-none text-white font-display font-medium select-none [&::-webkit-details-marker]:hidden">
             {faq.question}
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" class="text-white/30 flex-shrink-0 transition-transform duration-300 group-open:rotate-45">
