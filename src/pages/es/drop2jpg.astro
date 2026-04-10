@@ -1,0 +1,72 @@
+---
+import Base from '../../layouts/Base.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import { t } from '../../i18n/index';
+const lang = 'es';
+const i = t(lang);
+
+const icons = [
+  `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M12 15l-4-4M12 15l4-4"/><path d="M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg>`,
+  `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h6v6H4z"/><path d="M14 4h6v6h-6z"/><path d="M4 14h6v6H4z"/><path d="M14 14h6v6h-6z"/></svg>`,
+  `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg>`,
+  `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M15 9l-6 6"/><circle cx="9" cy="9" r="1" fill="currentColor"/><circle cx="15" cy="15" r="1" fill="currentColor"/></svg>`,
+  `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>`,
+  `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>`,
+];
+---
+
+<Base title={i.drop2jpg.title} description={i.drop2jpg.description} lang={lang}>
+  <Navbar lang={lang} />
+  <main>
+    <section class="relative min-h-[80vh] flex items-center justify-center pt-16 overflow-hidden">
+      <div class="absolute inset-0 pointer-events-none">
+        <div class="absolute inset-0 opacity-[0.03]" style="background-image: radial-gradient(circle, #fff 1px, transparent 1px); background-size: 32px 32px;"></div>
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] bg-amber/[0.07] rounded-full blur-[120px]"></div>
+      </div>
+      <div class="relative max-w-4xl mx-auto px-6 text-center py-24">
+        <div class="reveal inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/[0.08] bg-white/[0.03] text-xs text-white/40 font-mono mb-10">
+          <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span>
+          {i.drop2jpg.badge}
+        </div>
+        <h1 class="reveal reveal-delay-1 font-display text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight leading-[1.05] mb-6">
+          {i.drop2jpg.headline}<br />
+          <span class="bg-gradient-to-r from-amber-400 via-orange-400 to-amber-400 bg-clip-text text-transparent">{i.drop2jpg.headlineAccent}</span>
+        </h1>
+        <p class="reveal reveal-delay-2 text-lg sm:text-xl text-white/50 max-w-2xl mx-auto leading-relaxed mb-12">
+          {i.drop2jpg.subheadline}
+        </p>
+        <div class="reveal reveal-delay-3 flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
+          <a href="https://cdn.cdr2svg.com/Drop2JPG.dmg" onclick="gtag('event','file_download',{file_name:'Drop2JPG.dmg',link_text:'hero_download'})" class="group relative inline-flex items-center gap-3 px-8 py-4 rounded-xl bg-amber-400 text-surface font-display font-semibold text-base transition-all duration-300 hover:shadow-[0_0_40px_rgba(251,191,36,0.3)] hover:scale-[1.02]">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" class="transition-transform group-hover:-translate-y-0.5">
+              <path d="M9 2V12M9 12L4.5 7.5M9 12L13.5 7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M3 16H15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            {i.drop2jpg.cta}
+          </a>
+        </div>
+        <p class="reveal reveal-delay-4 text-xs text-white/25 font-mono">{i.drop2jpg.footnote}</p>
+      </div>
+    </section>
+    <section class="relative py-32 px-6">
+      <div class="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
+      <div class="max-w-6xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {i.drop2jpg.features.map((feature, idx) => (
+            <div class={`reveal reveal-delay-${Math.min(idx + 1, 5)} group relative p-7 rounded-2xl border border-white/[0.06] bg-white/[0.02] hover:bg-white/[0.04] hover:border-white/[0.1] transition-all duration-300`}>
+              <div class="w-12 h-12 rounded-xl bg-amber-400/[0.08] border border-amber-400/10 flex items-center justify-center text-amber-400 mb-5 transition-all duration-300 group-hover:bg-amber-400/[0.12] group-hover:border-amber-400/20 group-hover:shadow-[0_0_20px_rgba(251,191,36,0.1)]" set:html={icons[idx]} />
+              <h3 class="font-display font-semibold text-lg text-white mb-2">{feature.title}</h3>
+              <p class="text-sm text-white/40 leading-relaxed">{feature.description}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+    <section class="py-16 px-6 text-center">
+      <a href={`/${lang}/`} class="inline-flex items-center gap-2 text-sm text-white/30 hover:text-white/60 transition-colors">
+        {i.drop2jpg.backToCdr2svg}
+      </a>
+    </section>
+  </main>
+  <Footer lang={lang} />
+</Base>

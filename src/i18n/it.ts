@@ -102,6 +102,28 @@ export default {
     privacy: 'Privacy',
     terms: 'Termini',
     support: 'Supporto',
+    drop2jpg: 'Drop2JPG',
+  },
+
+  // Drop2JPG page
+  drop2jpg: {
+    title: 'Drop2JPG — Converti immagini in JPG su Mac',
+    description: 'Mini app gratuita per macOS. Trascina immagini WebP, AVIF, PNG o HEIC sull\'icona del Dock e ottieni JPG nella cartella Download. Apple Silicon nativo.',
+    headline: 'Immagini dentro.',
+    headlineAccent: 'JPG fuori.',
+    subheadline: 'Trascina file WebP, AVIF, PNG o HEIC sull\'icona del Dock. Ottieni JPG nella cartella Download. Fine.',
+    badge: 'macOS 13+ · Apple Silicon · Gratuito',
+    cta: 'Scarica Drop2JPG',
+    footnote: '100% gratuito · Senza account · Senza caricamento',
+    features: [
+      { title: 'Trascina sul Dock', description: 'Rilascia le immagini sull\'icona di Drop2JPG nel Dock. I JPG convertiti appaiono nella cartella Download all\'istante.' },
+      { title: 'WebP, AVIF, PNG, HEIC', description: 'Supporta i formati immagine moderni che l\'Anteprima di macOS non riesce a convertire facilmente in blocco in JPG.' },
+      { title: 'Qualità 90%, sRGB', description: 'Output di alta qualità con profilo colore sRGB. Gli sfondi trasparenti ricevono un riempimento bianco pulito.' },
+      { title: 'Apple Silicon nativo', description: 'Sviluppato in Swift per Mac con chip M. Leggero, veloce, senza la pesantezza di Electron.' },
+      { title: 'Notifiche macOS', description: 'Ricevi una notifica riepilogativa dopo ogni conversione in blocco. Saprai esattamente cosa è stato convertito.' },
+      { title: 'Gratuito per sempre', description: 'Nessuna licenza, nessun abbonamento, nessuna fregatura. Solo una piccola utilità gratuita che fa una cosa bene.' },
+    ],
+    backToCdr2svg: '← Torna a CDR2SVG',
   },
 
   // Thank you page
